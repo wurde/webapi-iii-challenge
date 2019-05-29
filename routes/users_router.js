@@ -7,6 +7,7 @@
 
 const express = require('express')
 const User = require('../models/User')
+const Post = require('../models/Post')
 
 /**
  * Define router
@@ -87,10 +88,37 @@ router.route('/:id')
 // GET,POST /users/:id/posts
 router.route('/:id/posts')
   .get(async (req, res) => {
-    res.sendStatus(200)
+    try {
+      let user = await User.getById(req.params.id)
+
+      if (user) {
+        let posts = await Post.get()
+        res.status(200).json(posts)
+      }
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: { message: 'Server error.' }})
+    }
   })
   .post(async (req, res) => {
-    res.sendStatus(200)
+    try {
+      let user = await User.getById(req.params.id)
+
+      if (user) {
+        if (!req.body) {
+          res.status(400).json({ error: { message: 'Missing form data.' }})
+        }
+        if (!req.body.text) {
+          res.status(400).json({ error: { message: 'Missing text value.' }})
+        }
+
+        let post = await Post.insert({ user_id: req.params.id, text: req.body.text })
+        res.status(201).json(post)
+      }
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: { message: 'Server error.' }})
+    }
   })
 
 /**
