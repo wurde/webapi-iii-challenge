@@ -5,6 +5,11 @@
  */
 
 function validateUserId(req, res, next) {
+  if (req.params.id) {
+    // user = 
+    // req.user = user
+  }
+
   next()
 }
 
