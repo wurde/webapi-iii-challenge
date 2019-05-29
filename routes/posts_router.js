@@ -17,11 +17,13 @@ const router = express.Router()
  * Routes
  */
 
+// GET /posts
 router.route('/')
   .get(async (req, res) => {
     res.sendStatus(200)
   })
 
+// GET,PUT,DELETE /posts/:id
 router.route('/:id')
   .get(async (req, res) => {
     res.sendStatus(200)
