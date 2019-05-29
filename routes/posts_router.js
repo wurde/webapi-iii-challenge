@@ -17,22 +17,21 @@ const router = express.Router()
  * Routes
  */
 
+router.route('/')
+  .get(async (req, res) => {
+    res.sendStatus(200)
+  })
 
-router.get('/', (req, res) => {
-  res.sendStatus(200)
-})
-
-router.get('/:id', (req, res) => {
-  res.sendStatus(200)
-})
-
-router.delete('/:id', (req, res) => {
-  res.sendStatus(200)
-})
-
-router.put('/:id', (req, res) => {
-  res.sendStatus(200)
-})
+router.route('/:id')
+  .get(async (req, res) => {
+    res.sendStatus(200)
+  })
+  .put(async (req, res) => {
+    res.sendStatus(200)
+  })
+  .delete(async (req, res) => {
+    res.sendStatus(200)
+  })
 
 /**
  * Export router

@@ -6,7 +6,7 @@
 
 
 const express = require('express')
-const db = require('../models/User')
+const User = require('../models/User')
 
 /**
  * Define router
@@ -18,33 +18,38 @@ const router = express.Router()
  * Routes
  */
 
-router.post('/', (req, res) => {
-  res.sendStatus(200)
-})
+router.route('/')
+  .get('/', async (req, res) => {
+    try {
+      let users = await User.get()
+      res.status(200).json(users)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: { message: 'Server error during users fetch.' }})
+    }
+  })
+  .post('/', async (req, res) => {
+    res.sendStatus(200)
+  })
 
-router.post('/:id/posts', (req, res) => {
-  res.sendStatus(200)
-})
+router.route('/:id/posts')
+  .get(async (req, res) => {
+    res.sendStatus(200)
+  })
+  .post(async (req, res) => {
+    res.sendStatus(200)
+  })
 
-router.get('/', (req, res) => {
-  res.sendStatus(200)
-})
-
-router.get('/:id', (req, res) => {
-  res.sendStatus(200)
-})
-
-router.get('/:id/posts', (req, res) => {
-  res.sendStatus(200)
-})
-
-router.delete('/:id', (req, res) => {
-  res.sendStatus(200)
-})
-
-router.put('/:id', (req, res) => {
-  res.sendStatus(200)
-})
+router.route('/:id')
+  .get(async (req, res) => {
+    res.sendStatus(200)
+  })
+  .put(async (req, res) => {
+    res.sendStatus(200)
+  })
+  .delete(async (req, res) => {
+    res.sendStatus(200)
+  })
 
 /**
  * Export router
