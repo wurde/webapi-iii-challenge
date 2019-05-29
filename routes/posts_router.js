@@ -50,7 +50,12 @@ router.route('/:id')
     res.sendStatus(200)
   })
   .delete(async (req, res) => {
-    res.sendStatus(200)
+    try {
+      await Post.remove(req.params.id)
+      res.sendStatus(200)
+    } catch (err) {
+      res.status(500).json({ error: { message: 'Server error.' }})
+    }
   })
 
 /**
