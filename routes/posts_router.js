@@ -34,7 +34,17 @@ router.route('/')
 // GET,PUT,DELETE /posts/:id
 router.route('/:id')
   .get(async (req, res) => {
-    res.sendStatus(200)
+    try {
+      let post = await Post.getById(req.params.id)
+
+      if (post) {
+        res.status(200).json(post)
+      } else {
+        res.status(404).json({ error: { message: `Post not found for ID '${req.params.id}'.` }})
+      }
+    } catch (err) {
+      res.status(500).json({ error: { message: 'Server error.' }})
+    }
   })
   .put(async (req, res) => {
     res.sendStatus(200)
