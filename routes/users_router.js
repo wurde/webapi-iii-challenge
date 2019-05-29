@@ -30,7 +30,20 @@ router.route('/')
     }
   })
   .post(async (req, res) => {
-    res.sendStatus(200)
+    if (!req.body) {
+      res.status(400).json({ error: { message: 'Missing form data.' }})
+    }
+    if (!req.body.name) {
+      res.status(400).json({ error: { message: 'Missing name value.' }})
+    }
+
+    try {
+      let user = await User.insert({ name: req.body.name })
+      res.status(201).json(user)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: { message: 'Server error.' }})
+    }
   })
 
 // GET,PUT,DELETE /users/:id

@@ -22,6 +22,7 @@ const app = express()
  * Middleware
  */
 
+app.use(express.json())
 app.use(require('./middleware/logger'))
 
 /**
