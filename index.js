@@ -19,6 +19,12 @@ const port = 8080
 const app = express()
 
 /**
+ * Middleware
+ */
+
+app.use(require('./middleware/logger'))
+
+/**
  * Routes
  */
 
