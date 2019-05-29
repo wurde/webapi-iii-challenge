@@ -47,7 +47,18 @@ router.route('/:id')
     }
   })
   .put(async (req, res) => {
-    res.sendStatus(200)
+    try {
+      let post = await Post.getById(req.params.id)
+
+      if (post) {
+        await Post.update(req.params.id, { text: req.body.text })
+        res.sendStatus(200)
+      } else {
+        res.status(404).json({ error: { message: `Post not found for ID '${req.params.id}'.` }})
+      }
+    } catch (err) {
+      res.status(500).json({ error: { message: 'Server error.' }})
+    }
   })
   .delete(async (req, res) => {
     try {
