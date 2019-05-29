@@ -16,7 +16,7 @@
     "blog",
     "api"
   ],
-  "author": "Lambda School",
+  "author": ["Lambda School", "Andy Bettisworth"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/LambdaSchool/Node-Blog/issues"
