@@ -4,7 +4,7 @@
  * Define middleware
  */
 
-function validateUserId(req, res, next) {
+function validatePostId(req, res, next) {
   next()
 }
 
@@ -12,4 +12,4 @@ function validateUserId(req, res, next) {
  * Export middleware
  */
 
-module.exports = validateUserId
+module.exports = validatePostId
