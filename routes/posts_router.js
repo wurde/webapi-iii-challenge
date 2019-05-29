@@ -6,6 +6,7 @@
 
 
 const express = require('express')
+const Post = require('../models/Post')
 
 /**
  * Define router
@@ -20,7 +21,14 @@ const router = express.Router()
 // GET /posts
 router.route('/')
   .get(async (req, res) => {
-    res.sendStatus(200)
+    try {
+      let posts = await Post.get()
+
+      res.status(200).json(posts)
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: { message: 'Server error during posts fetch.' }})
+    }
   })
 
 // GET,PUT,DELETE /posts/:id

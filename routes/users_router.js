@@ -92,7 +92,7 @@ router.route('/:id/posts')
       let user = await User.getById(req.params.id)
 
       if (user) {
-        let posts = await Post.get()
+        let posts = await User.getUserPosts(req.params.id)
         res.status(200).json(posts)
       }
     } catch (err) {
