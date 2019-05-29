@@ -28,9 +28,9 @@ app.use(require('./middleware/logger'))
  * Routes
  */
 
-app.use('/', require('./root_router'))
-app.use('/users', require('./users_router'))
-app.use('/posts', require('./posts_router'))
+app.use('/', require('./routes/root_router'))
+app.use('/users', require('./routes/users_router'))
+app.use('/posts', require('./routes/posts_router'))
 
 /**
  * Start server

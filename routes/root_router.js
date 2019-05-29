@@ -5,7 +5,7 @@
  */
 
 
-const express = 'express'
+const express = require('express')
 
 /**
  * Define router

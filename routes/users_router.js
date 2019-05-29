@@ -5,7 +5,7 @@
  */
 
 
-const express = 'express'
+const express = require('express')
 const db = require('../models/User')
 
 /**
