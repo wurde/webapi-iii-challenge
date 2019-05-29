@@ -5,6 +5,7 @@
  */
 
 function logger(req, res, next) {
+  console.log(`${new Date()} :: ${req.method.toUpperCase()} ${req.originalUrl}`)
   next()
 }
 
