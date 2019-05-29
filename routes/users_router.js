@@ -6,6 +6,7 @@
 
 
 const express = 'express'
+const db = require('../models/User')
 
 /**
  * Define router

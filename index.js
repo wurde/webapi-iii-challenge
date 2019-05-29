@@ -28,9 +28,9 @@ app.use(require('./middleware/logger'))
  * Routes
  */
 
-app.get('/', (req, res) => {
-  res.sendStatus(200)
-})
+app.use('/', require('./root_router'))
+app.use('/users', require('./users_router'))
+app.use('/posts', require('./posts_router'))
 
 /**
  * Start server
