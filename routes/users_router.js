@@ -49,13 +49,39 @@ router.route('/')
 // GET,PUT,DELETE /users/:id
 router.route('/:id')
   .get(async (req, res) => {
-    res.sendStatus(200)
+    try {
+      let user = await User.getById(req.params.id)
+
+      if (user) {
+        res.status(200).json(user)
+      } else {
+        res.status(404).json({ error: { message: `User not found for ID '${req.params.id}'.` }})
+      }
+    } catch (err) {
+      res.status(500).json({ error: { message: 'Server error.' }})
+    }
   })
   .put(async (req, res) => {
-    res.sendStatus(200)
+    try {
+      let user = await User.getById(req.params.id)
+
+      if (user) {
+        await User.update(req.params.id, { name: req.body.name })
+        res.sendStatus(200)
+      } else {
+        res.status(404).json({ error: { message: `User not found for ID '${req.params.id}'.` }})
+      }
+    } catch (err) {
+      res.status(500).json({ error: { message: 'Server error.' }})
+    }
   })
   .delete(async (req, res) => {
-    res.sendStatus(200)
+    try {
+      await User.remove(req.params.id)
+      res.sendStatus(200)
+    } catch (err) {
+      res.status(500).json({ error: { message: 'Server error.' }})
+    }
   })
 
 // GET,POST /users/:id/posts
